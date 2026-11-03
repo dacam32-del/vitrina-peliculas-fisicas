@@ -1,0 +1,110 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cine Club Retro · Películas en Formato Físico</title>
+<link href="https://fonts.googleapis.com/css2?family=Limelight&family=Oswald:wght@400;600&family=Lora:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#120607;--paper:#1e0b0d;--ink:#f6ead0;--red:#9b1116;--red2:#c4161c;--gold:#f2c94c;--mut:#c9a97a}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);font-family:Lora,serif;background:var(--bg) radial-gradient(ellipse at top,#3a0a0e 0,#120607 60%)}
+header{text-align:center;padding:26px 16px 30px;background:repeating-linear-gradient(90deg,#7a0d12 0 22px,#9b1116 22px 44px);border-bottom:6px solid var(--gold);box-shadow:inset 0 -30px 40px rgba(0,0,0,.45)}
+.marq{display:inline-block;background:#1a0a05;border:4px solid var(--gold);border-radius:14px;padding:16px 28px;position:relative;box-shadow:0 0 22px rgba(242,201,76,.5)}
+.marq:before,.marq:after{content:'';position:absolute;left:8px;right:8px;height:8px;background:radial-gradient(circle,#ffe9a0 0 3px,transparent 4px) 0 0/18px 8px repeat-x;animation:bl 1.2s steps(2) infinite}
+.marq:before{top:-2px}.marq:after{bottom:-2px}@keyframes bl{50%{opacity:.35}}
+h1{font-family:Limelight,serif;color:var(--gold);font-size:2.5em;margin:0;text-shadow:0 0 10px rgba(242,201,76,.7)}header p{margin:6px 0 0;font-style:italic;color:#ffe9c7}
+.wa{display:inline-flex;gap:6px;align-items:center;margin-top:14px;background:#25d366;color:#fff;text-decoration:none;padding:8px 16px;border-radius:22px;font-family:Oswald;font-weight:600}
+.stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:18px}.stat{border:2px solid var(--gold);padding:8px 18px;border-radius:8px;background:rgba(0,0,0,.4)}
+.stat b{display:block;font-family:Limelight;font-size:1.4em;color:var(--gold)}.stat span{font-family:Oswald;font-size:.8em;text-transform:uppercase;letter-spacing:1px}
+.filters{max-width:1200px;margin:22px auto;padding:16px;background:var(--paper);border:2px solid #5a1a1a;border-radius:10px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.filters label{font-family:Oswald;font-size:.8em;text-transform:uppercase;letter-spacing:1px;color:var(--gold)}
+select,input{width:100%;padding:7px;border:1px solid #6b2a2a;background:#2a0f12;color:var(--ink);font-family:Lora;border-radius:4px}
+#count{max-width:1200px;margin:0 auto;padding:0 16px;color:var(--mut);font-style:italic}
+.grid{max-width:1200px;margin:10px auto 30px;padding:0 16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:22px}
+.card{background:var(--paper);border:2px solid #4a1515;border-radius:8px;overflow:hidden;cursor:pointer;transition:transform .15s;box-shadow:0 6px 18px rgba(0,0,0,.5)}
+.card:hover{transform:translateY(-4px);border-color:var(--gold)}.card img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;background:#000}
+.noimg{aspect-ratio:2/3;display:flex;align-items:center;justify-content:center;background:#2a0f12;font-size:3em}
+.cb{padding:12px}.cb .t{font-family:Oswald;font-weight:600;font-size:1.1em}.cb .a{color:var(--mut);font-size:.85em;font-style:italic;margin:3px 0 8px}
+.tag{display:inline-block;font-family:Oswald;font-size:.72em;padding:2px 8px;border-radius:10px;background:#4a1515;color:#ffd9a0;margin:0 3px 3px 0}.tag.f{background:var(--gold);color:#2a0a0a}
+.price{margin-top:8px;color:var(--gold);font-weight:600;font-family:Oswald}
+.empty{grid-column:1/-1;text-align:center;padding:70px 20px;font-family:Limelight;font-size:1.6em;color:var(--gold)}
+.seats{height:70px;background:radial-gradient(ellipse 22px 26px at 50% 100%,#8e1218 96%,transparent) 0 100%/52px 52px repeat-x,radial-gradient(ellipse 22px 26px at 50% 100%,#6d0d12 96%,transparent) 26px 30px/52px 52px repeat-x;opacity:.9}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;padding:16px;z-index:9}.modal.on{display:flex}
+.box{background:var(--paper);max-width:900px;width:100%;max-height:92vh;overflow:auto;border-radius:10px;border-top:8px solid var(--gold);padding:22px;position:relative}
+.box h2{font-family:Limelight;margin:0 0 4px;color:var(--gold)}.x{position:absolute;right:14px;top:8px;font-size:1.8em;cursor:pointer;color:var(--gold)}
+.ph{display:flex;gap:8px;overflow-x:auto;margin:12px 0}.ph img{height:280px;border-radius:4px;border:1px solid #5a1a1a}
+table{width:100%;border-collapse:collapse;font-size:.92em}td{padding:6px;border-bottom:1px dotted #6b2a2a;vertical-align:top}td:first-child{color:var(--gold);font-family:Oswald;width:36%}
+footer{text-align:center;padding:16px;color:var(--mut);font-size:.85em}
+</style></head><body>
+<header><div class="marq"><h1>🎬 Cine Club Retro</h1><p>Películas de todos los tiempos en formato físico · VHS · Betamax · DVD · Blu-ray · LaserDisc · 8mm / Super 8 / 16mm</p></div><br>
+<a class="wa" href="https://wa.me/56956592453?text=Hola!%20Vi%20tu%20vitrina%20de%20pel%C3%ADculas%20en%20formato%20f%C3%ADsico%20y%20quiero%20consultar" target="_blank" rel="noopener">💬 Consultar por WhatsApp</a>
+<div class="stats"><div class="stat"><b>0</b><span>Fichas</span></div><div class="stat"><b>0</b><span>Unidades</span></div><div class="stat"><b>$0 – $0</b><span>Valor total Chile (CLP)</span></div></div></header>
+<div class="filters">
+<div><label>Buscar</label><input id="q" placeholder="Título, director, actor…"></div>
+<div><label>Formato</label><select id="f_formato"></select></div><div><label>Género</label><select id="f_genero"></select></div>
+<div><label>Década</label><select id="f_dec"></select></div><div><label>Año</label><select id="f_anio"></select></div>
+<div><label>Estado</label><select id="f_estado"></select></div><div><label>Idioma</label><select id="f_idioma"></select></div><div><label>Región</label><select id="f_region"></select></div>
+<div><label>Precio mín. (CLP)</label><input id="pmin" type="number" min="0"></div><div><label>Precio máx. (CLP)</label><input id="pmax" type="number" min="0"></div>
+<div><label>Ordenar</label><select id="ord"><option value="d">Más caras primero</option><option value="a">Más baratas primero</option><option value="yo">Más antiguas</option><option value="yn">Más recientes</option><option value="t">Título A–Z</option></select></div>
+</div><div id="count"></div><div class="grid" id="g"></div><div class="seats"></div>
+<div class="modal" id="m"><div class="box" id="mb"></div></div>
+<footer>Precios estimados: referencia internacional (eBay, Discogs, WorthPoint) y mercado chileno, según estado · dólar indicado en cada ficha.</footer>
+<script>
+const D=[],WA="https://wa.me/56956592453?text=Hola!%20Vi%20tu%20vitrina%20de%20pel%C3%ADculas%20en%20formato%20f%C3%ADsico%20y%20quiero%20consultar";const $=i=>document.getElementById(i);const e=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const est=p=>{const s=p.estado;return typeof s==='object'&&s?(s.escala||''):String(s||'').split(/[(·,-]/)[0].trim()};
+const F={f_formato:p=>p.formato,f_genero:p=>p.genero,f_dec:p=>p.dec,f_anio:p=>p.y?String(p.y):'',f_estado:est,f_idioma:p=>p.idioma,f_region:p=>p.region};
+for(const[id,fn]of Object.entries(F)){const v=[...new Set(D.map(fn).filter(Boolean))].sort();$(id).innerHTML='<option value="">Todos</option>'+v.map(x=>`<option>${e(x)}</option>`).join('');$(id).onchange=r}
+['q','pmin','pmax','ord'].forEach(i=>$(i).oninput=r);
+const estTxt=p=>{const s=p.estado;return typeof s==='object'&&s?`${s.escala||''}${s.nota?' · '+s.nota+'/10':''}${s.detalle?' — '+s.detalle:''}`:(s||'')};
+function r(){const q=$('q').value.toLowerCase(),a=+$('pmin').value||0,b=+$('pmax').value||1e15;
+let L=D.filter(p=>Object.entries(F).every(([id,fn])=>!$(id).value||fn(p)==$(id).value)&&p.pmax>=a&&p.pmin<=b&&(!q||JSON.stringify(p).toLowerCase().includes(q)));
+const o=$('ord').value;L.sort((x,y)=>o=='a'?x.pmin-y.pmin:o=='yo'?(x.y||9999)-(y.y||9999):o=='yn'?y.y-x.y:o=='t'?String(x.titulo).localeCompare(y.titulo):y.pmax-x.pmax||y.pmin-x.pmin);
+$('count').textContent=D.length?`${L.length} de ${D.length} películas`:'';
+$('g').innerHTML=!D.length?'<div class="empty">🍿 Próximamente · la cartelera se está cargando</div>':!L.length?'<div class="empty">Sin funciones para estos filtros</div>':L.map(p=>`<div class="card" onclick="sh('${p.id}')">${p.imgs.length?`<img loading="lazy" src="${p.imgs[0]}">`:`<div class="noimg">🎞</div>`}<div class="cb"><div class="t">${e(p.titulo)}</div><div class="a">${p.anio?e(p.anio):''}${p.director?' · '+e(p.director):''}</div><span class="tag f">${e(p.formato)}</span>${p.genero?`<span class="tag">${e(p.genero)}</span>`:''}${est(p)?`<span class="tag">${e(est(p))}</span>`:''}<div class="price">${e(p.venta_chile_clp)} CLP</div></div></div>`).join('')}
+const LB={id:'Código',titulo:'Título',titulo_original:'Título original',anio:'Año',director:'Director',genero:'Género',formato:'Formato',edicion:'Edición / distribuidora',region:'Región',idioma:'Idioma / subtítulos',duracion:'Duración',reparto:'Reparto',empaque:'Empaque',estado:'Estado',rareza:'Rareza',valor_internacional_usd:'Valor internacional (USD)',valor_internacional_clp:'Valor internacional (CLP)',venta_chile_clp:'Precio estimado Chile (CLP)',stock:'Unidades',notas:'Notas',dolar:'Dólar usado',fecha:'Fecha de registro'};
+function sh(id){const p=D.find(x=>x.id==id);$('mb').innerHTML=`<span class="x" onclick="$('m').classList.remove('on')">×</span><h2>${e(p.titulo)}</h2><i>${e(p.titulo_original||'')}${p.anio?' · '+e(p.anio):''}</i>${p.resena?`<p style="border-left:3px solid var(--gold);padding-left:10px">🎬 ${e(p.resena)}</p>`:''}<div class="ph">${p.imgs.map(i=>`<a href="${i}" target="_blank"><img src="${i}"></a>`).join('')}</div><table>${Object.entries(LB).filter(([k])=>p[k]!=null&&p[k]!=='').map(([k,l])=>`<tr><td>${l}</td><td>${e(k=='estado'?estTxt(p):p[k])}</td></tr>`).join('')}</table><p><a class="wa" href="${WA}%20por%20${encodeURIComponent(p.id+' '+p.titulo)}" target="_blank" rel="noopener">💬 Consultar por esta película</a></p>`;$('m').classList.add('on')}
+$('m').onclick=ev=>{if(ev.target.id=='m')$('m').classList.remove('on')};document.onkeydown=ev=>{if(ev.key=='Escape')$('m').classList.remove('on')};r();
+</script><div id="musica-credito" style="text-align:center;font-size:11px;opacity:.6;padding:8px 8px 70px">Música: "Heroic Age" de Kevin MacLeod (<a href="https://incompetech.com" style="color:inherit">incompetech.com</a>), licencia <a href="https://creativecommons.org/licenses/by/4.0/" style="color:inherit">CC BY 4.0</a></div>
+<audio id="bgm" src="audio/musica.mp3" loop preload="auto"></audio>
+<button id="bgm-btn" aria-label="Música" title="Música" style="position:fixed;left:16px;bottom:16px;z-index:9999;width:44px;height:44px;border-radius:50%;border:2px solid #f2c94c;background:#5a0b0b;color:#f2c94c;font-size:20px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.4);opacity:.9">🔇</button>
+<script>(function(){var a=document.getElementById('bgm'),b=document.getElementById('bgm-btn'),K='vitrina_musica_pausada';a.volume=0.35;
+function ui(){b.textContent=a.paused?'🔇':'🔊';}
+function go(){return a.play().then(ui).catch(function(){ui();});}
+function first(e){if(e&&e.target===b)return;rm();if(localStorage.getItem(K)!=='1'&&a.paused)go();}
+function rm(){['click','touchstart','keydown'].forEach(function(t){document.removeEventListener(t,first,true);});}
+b.addEventListener('click',function(){rm();if(a.paused){localStorage.removeItem(K);go();}else{a.pause();localStorage.setItem(K,'1');ui();}});
+a.addEventListener('play',ui);a.addEventListener('pause',ui);
+if(localStorage.getItem(K)!=='1'){a.play().then(ui).catch(function(){['click','touchstart','keydown'].forEach(function(t){document.addEventListener(t,first,true);});});}
+})();</script>
+<!-- calculadora-vitrina -->
+<style>#cv-btn{position:fixed;right:16px;bottom:88px;z-index:9998;width:52px;height:52px;border-radius:50%;border:2px solid #f2c94c;background:#5a0b0b;color:#f2c94c;font-size:24px;cursor:pointer;box-shadow:0 3px 10px rgba(0,0,0,.45)}
+#cv-btn b{position:absolute;top:-6px;right:-6px;background:#e11;color:#fff;font:700 12px/20px sans-serif;min-width:20px;height:20px;border-radius:10px;padding:0 4px}
+#cv-btn.cv-f{animation:cvf .4s}@keyframes cvf{50%{transform:scale(1.25)}}
+#cv-pan{position:fixed;right:16px;bottom:150px;z-index:10000;width:min(360px,calc(100vw - 32px));max-height:65vh;overflow:auto;background:#5a0b0b;color:#f2c94c;border:2px solid #f2c94c;border-radius:14px;box-shadow:0 8px 30px rgba(0,0,0,.55);font:14px/1.35 system-ui,sans-serif;display:none;padding:10px}
+#cv-pan.cv-o{display:block}#cv-pan .cv-h{font-weight:700;font-size:16px;display:flex;justify-content:space-between;margin-bottom:6px}
+#cv-pan [data-a]{cursor:pointer;user-select:none}#cv-pan .cv-r{border-top:1px solid rgba(128,128,128,.35);padding:6px 0}
+#cv-pan .cv-n{font-weight:600;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+#cv-pan .cv-c{display:flex;align-items:center;gap:6px;margin-top:3px;flex-wrap:wrap}#cv-pan .cv-c span[data-a]{display:inline-block;min-width:22px;text-align:center;border:1px solid #f2c94c;border-radius:6px}
+#cv-pan input{width:90px;background:transparent;color:inherit;border:1px solid rgba(128,128,128,.6);border-radius:6px;padding:2px 4px}#cv-pan small{opacity:.7}
+#cv-pan .cv-s{text-align:right;font-weight:600}#cv-pan .cv-t{display:flex;justify-content:space-between;border-top:2px solid #f2c94c;margin-top:6px;padding-top:6px;font-size:16px}
+#cv-pan .cv-v{margin-top:8px;text-align:center;border:1px solid #f2c94c;border-radius:8px;padding:4px}#cv-pan .cv-e,#cv-pan .cv-note{opacity:.75;font-size:12px;margin-top:6px}
+.cv-add{position:absolute;right:6px;bottom:6px;z-index:5;background:#5a0b0b;color:#f2c94c;border:1px solid #f2c94c;border-radius:14px;padding:3px 9px;font:600 12px/1.3 system-ui,sans-serif;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.35)}.cv-add:hover{filter:brightness(1.2)}</style>
+<script>(function(){var C={"card": "div.card", "name": ".t", "price": ".price", "key": "peliculas"},K='calc_vitrina_'+C.key,S=[];try{S=JSON.parse(localStorage.getItem(K))||[]}catch(e){}
+function save(){localStorage.setItem(K,JSON.stringify(S))}
+function fmt(n){return '$'+Math.round(n).toLocaleString('es-CL')}
+function parse(t){t=t||'';var i=t.lastIndexOf('Chile');if(i>=0)t=t.slice(i);var m=t.match(/\d[\d.]*(?:,\d+)?/g)||[];var v=m.map(function(x){return parseInt(x.replace(/,\d+$/,'').replace(/\./g,''),10)}).filter(function(x){return !isNaN(x)}).slice(0,2);
+ if(!v.length)return{p:0,r:false};if(v.length==2&&v[1]>v[0])return{p:Math.round((v[0]+v[1])/2),r:true};return{p:v[0],r:false}}
+function nm(c){if(C.name[0]=='@')return c.getAttribute(C.name.slice(1))||'';var e=c.querySelector(C.name);return e?e.textContent.trim():''}
+function deco(){document.querySelectorAll(C.card).forEach(function(c){if(c.querySelector('.cv-add'))return;if(getComputedStyle(c).position=='static')c.style.position='relative';var b=document.createElement('span');b.className='cv-add';b.setAttribute('role','button');b.tabIndex=0;b.textContent='➕ Agregar';c.appendChild(b)})}
+function add(c){var n=nm(c),pe=c.querySelector(C.price),pr=parse(pe?pe.textContent:'');var id=c.getAttribute('data-id')||n;var it=S.find(function(x){return x.id==id});if(it)it.q++;else S.push({id:id,n:n,p:pr.p,r:pr.r,q:1});save();draw();flash()}
+var btn=document.createElement('button'),pan=document.createElement('div');btn.id='cv-btn';btn.title='Calculadora';pan.id='cv-pan';
+function flash(){btn.classList.remove('cv-f');void btn.offsetWidth;btn.classList.add('cv-f')}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function draw(){var q=0,t=0;S.forEach(function(x){q+=x.q;t+=x.q*x.p});btn.innerHTML='🧮'+(q?'<b>'+q+'</b>':'');
+ pan.innerHTML='<div class="cv-h">🧮 Mi cuenta<span class="cv-x" data-a="close">✕</span></div>'+(S.length?'<div class="cv-l">'+S.map(function(x,i){return '<div class="cv-r"><div class="cv-n">'+esc(x.n)+'</div><div class="cv-c">$<input type="number" min="0" step="100" value="'+x.p+'" data-i="'+i+'" class="cv-p">'+(x.r?'<small title="Punto medio del rango de precio">≈ medio</small>':'')+' <span data-a="m" data-i="'+i+'">−</span><b>'+x.q+'</b><span data-a="p" data-i="'+i+'">+</span><span data-a="d" data-i="'+i+'" title="Quitar">🗑</span></div><div class="cv-s">'+fmt(x.p*x.q)+'</div></div>'}).join('')+'</div>':'<div class="cv-e">Toca “➕ Agregar” en una ficha para sumarla.</div>')+
+ '<div class="cv-t"><span>'+q+' ítem'+(q==1?'':'s')+'</span><b>'+fmt(t)+' CLP</b></div>'+(S.length?'<div class="cv-v" data-a="clr">Vaciar</div>':'')+'<div class="cv-note">Precios de referencia; “≈ medio” = punto medio del rango.</div>'}
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('.cv-add');if(a){e.preventDefault();e.stopPropagation();add(a.closest(C.card))}},true);
+document.addEventListener('keydown',function(e){var a=e.target.closest&&e.target.closest('.cv-add');if(a&&(e.key=='Enter'||e.key==' ')){e.preventDefault();e.stopPropagation();add(a.closest(C.card))}},true);
+pan.addEventListener('click',function(e){var a=e.target.getAttribute('data-a'),i=+e.target.getAttribute('data-i');if(!a)return;if(a=='close')pan.classList.remove('cv-o');if(a=='p')S[i].q++;if(a=='m'){S[i].q--;if(S[i].q<1)S.splice(i,1)}if(a=='d')S.splice(i,1);if(a=='clr'&&confirm('¿Vaciar la cuenta?'))S=[];save();draw()});
+pan.addEventListener('change',function(e){if(e.target.classList.contains('cv-p')){S[+e.target.dataset.i].p=Math.max(0,+e.target.value||0);S[+e.target.dataset.i].r=false;save();draw()}});
+btn.addEventListener('click',function(){pan.classList.toggle('cv-o')});
+function init(){document.body.appendChild(btn);document.body.appendChild(pan);draw();deco();new MutationObserver(function(){clearTimeout(init.t);init.t=setTimeout(deco,60)}).observe(document.body,{childList:true,subtree:true})}
+if(document.body)init();else document.addEventListener('DOMContentLoaded',init)})();</script>
+<!-- /calculadora-vitrina -->
+</body></html>
